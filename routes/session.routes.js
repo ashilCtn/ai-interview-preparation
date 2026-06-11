@@ -70,9 +70,7 @@ router.post('/learn-more', protect, async (req, res) => {
         messages: [{ role: 'user', content: learnMorePrompt({ topic, role }) }]
     });
 
-    const raw = message.choices[0].message.content;
-    const clean = raw.replace(/[#*`_]/g, '').trim();
-    res.json({ explanation: clean });
+    res.json({ explanation: message.choices[0].message.content.trim() });
 });
 
 // Load More questions
