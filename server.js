@@ -13,5 +13,8 @@ app.use(express.json());
 
 app.use('/api/auth', authRoutes);
 app.use('/api/sessions', sessionRoutes);
+app.get('/', (req, res)=>{
+    res.send('hello you reached us');
+})
 
 app.listen(process.env.PORT, () => console.log(`Server running on port ${process.env.PORT}`));
