@@ -8,7 +8,7 @@ const createSession = async (req, res) => {
     const { role, topics, experience, description } = req.body;
 
     const message = await getClient().chat.completions.create({
-        model: 'llama-3.3-70b-versatile',
+        model: 'openai/gpt-oss-120b',
         max_tokens: 3000,
         messages: [{ role: 'user', content: generateQnaPrompt({ role, topics, experience, description }) }]
     });
@@ -56,7 +56,7 @@ const learnMore = async (req, res) => {
     const { topic, role } = req.body;
 
     const message = await getClient().chat.completions.create({
-        model: 'llama-3.3-70b-versatile',
+        model: 'openai/gpt-oss-120b',
         max_tokens: 1000,
         messages: [{ role: 'user', content: learnMorePrompt({ topic, role }) }]
     });
@@ -71,7 +71,7 @@ const loadMore = async (req, res) => {
     const existingQuestions = session.qna.map((q, i) => `${i + 1}. ${q.question}`).join('\n');
 
     const message = await getClient().chat.completions.create({
-        model: 'llama-3.3-70b-versatile',
+        model: 'openai/gpt-oss-120b',
         max_tokens: 3000,
         messages: [{ role: 'user', content: loadMorePrompt({ role: session.role, experience: session.experience, topics: session.topics, existingQuestions }) }]
     });
